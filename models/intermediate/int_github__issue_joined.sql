@@ -63,7 +63,7 @@ milestone as (
 )
 
 select
-  milestone.milestone,
+  milestone.title as milestone,
   issue.*,
   case 
     when issue.is_pull_request then {{ dbt.concat(["'https://github.com/'",'repository_teams.repository',"'/pull/'", 'issue.issue_number']) }}
