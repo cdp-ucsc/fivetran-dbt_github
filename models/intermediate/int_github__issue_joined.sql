@@ -90,7 +90,7 @@ select
   number_of_reviews
 from issue
 left join milestone
-  on milestone.milestone_id.= issue.milestone_id
+  on issue.milestone_id = milestone.milestone_id
 left join issue_labels as labels
   on issue.issue_id = labels.issue_id
 join repository_teams
