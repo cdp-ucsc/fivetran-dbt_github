@@ -4,6 +4,7 @@ with issue_joined as (
 )
 
 select
+  milestone,
   issue_id,
   body,
   closed_at,
