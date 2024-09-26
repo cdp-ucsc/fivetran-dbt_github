@@ -24,3 +24,4 @@ vars:
     requested_reviewer_history: "{{ ref('stg_github__requested_reviewer_history') }}"
     team: "{{ ref('stg_github__team') }}"
     user: "{{ ref('stg_github__user') }}"
+    milestone: "{{ ref('stg_github__milestone') }}"
