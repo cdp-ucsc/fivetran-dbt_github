@@ -55,9 +55,15 @@ pull_request_reviewers as (
 pull_request as (
     select *
     from {{ var('pull_request')}}
+),
+
+milestone as (
+    select * 
+    from {{ var('milestone')}}
 )
 
 select
+  milestone.milestone,
   issue.*,
   case 
     when issue.is_pull_request then {{ dbt.concat(["'https://github.com/'",'repository_teams.repository',"'/pull/'", 'issue.issue_number']) }}
@@ -83,6 +89,8 @@ select
   requested_reviewers,
   number_of_reviews
 from issue
+left join milestone
+  on milestone.milestone_id.= issue.milestone_id
 left join issue_labels as labels
   on issue.issue_id = labels.issue_id
 join repository_teams
@@ -101,3 +109,4 @@ left join pull_request_times
   on issue.issue_id = pull_request_times.issue_id
 left join pull_request_reviewers
   on pull_request.pull_request_id = pull_request_reviewers.pull_request_id
+
